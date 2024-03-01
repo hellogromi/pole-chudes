@@ -3,6 +3,10 @@ import random
 # Список слов для угадывания
 word_list = ["яблоко", "груша", "слива", "абрикос", "вишня", "сливовица"]
 
+remaining_latters = ["А", "Б", "В", "Г", "Д", "Е", "Ё", "Ж", "З", "И", "Й", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ъ", "Ы", "Ь", "Э", "Ю", "Я"]
+remaining_latters = " ".join(remaining_latters).lower()
+remaining_latters = remaining_latters.split()
+
 # Функция для выбора случайного слова
 def select_word():
     return random.choice(word_list).lower()
@@ -52,8 +56,7 @@ def play_game():
             elif guess == "!used":
                 print("Использованные буквы:", ", ".join(guessed_letters))
             elif guess == "!remaining":
-                remaining_letters = [letter for letter in word if letter not in guessed_letters]
-                print("Оставшиеся буквы:", ", ".join(remaining_letters))
+                print("Оставшиеся буквы:", ", ".join(remaining_latters))
             else:
                 print("Неверная команда!")
             continue
@@ -67,6 +70,7 @@ def play_game():
             continue
 
         guessed_letters.append(guess)
+        remaining_latters.remove(guess)
 
         if guess in word:
             print("Вы угадали букву!")
